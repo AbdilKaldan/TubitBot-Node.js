@@ -26,7 +26,7 @@ bot.command('start', function (msg, reply, next) {
     reply.text(`Merhaba ${msg.from.firstname}`+'\nNasıl yardımcı olabilirim');
     logging.info('Hosgeldin Mesajı Gonderildi');
   });
-  bot.text(function (msg, reply, next){
+bot.text(function (msg, reply, next){
     if(msg.text.toLowerCase().search('adım')===0 || msg.text.toLowerCase().search('ismim')===0){
         reply.text(`Senin adın ${msg.from.firstname}`);
     }else{

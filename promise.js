@@ -31,18 +31,18 @@ bot.text(function (msg, reply, next){
 			reply.text(`Senin adın ${msg.from.firstname}`);
 	  	}else{ return msg }
 	  }).then(message => {
-	  	const options = {
-	            url: 'http://beta.ceyd-a.com/jsonengine.jsp',
-	            method: 'POST',
-	            form: {
-	                'username': '<<CEYD-A-USERNAME>>',
-	                'token': '<<CEYD-A-TOKEN>>',
-	                'code': message,
-	            },
+      const options = {
+        url: 'http://beta.ceyd-a.com/jsonengine.jsp',
+        method: 'POST',
+        form: {
+          'username': '<<CEYD-A-USERNAME>>',
+          'token': '<<CEYD-A-TOKEN>>',
+          'code': message,
+        },
 	    };
 		request(options, function (err, res, body) {
-	        let json = JSON.parse(body.slice(1, -3)).answer;
-			if (json !== '') { 
+	    let json = JSON.parse(body.slice(1, -3)).answer;
+			if (json !== '') {
 				if(json.search('Yeni adım artık')===0 || json.search('İsmim artık')===0){
 					reply.text('Benim isimim TubitBot ve bunu değştirmene izin veremem. Beni böyle sev.')
 					options.form.code ='Senin ismin TubitBot';
@@ -53,10 +53,9 @@ bot.text(function (msg, reply, next){
 					logging.info(`Ceyd-a ( ${json} ) cevabını verdi.`);
 					reply.text(json);
 				}
-	      	}
-	       	else{
-	      		reply.text('Ceyd-A API Beta sürümünde çalıştığı için bazı komutlarda eksilik var. Play Store dan tam sürümü indirip bu komutu tekrar deneyebilirsin.');
-	            logging.info(json);
+	    }else{
+        reply.text('Ceyd-A API Beta sürümünde çalıştığı için bazı komutlarda eksilik var. Play Store dan tam sürümü indirip bu komutu tekrar deneyebilirsin.');
+	      logging.info(json);
 	       	}
 	  	})
 	  }).catch((err) => {
